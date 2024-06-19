@@ -4,15 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Try MBTI Match!</title>
+  <title>Try MBTI Match</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script>
     function redirectToAppStore() {
+      const androidUrl = 'https://play.google.com/store/apps/details?id=app.netlify.mbti';
+      const iosUrl = 'https://apps.apple.com/kr/app/you-i-mbti-match/id6502995968';
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const userLang = navigator.language || navigator.userLanguage;
+
+      if (userLang.startsWith('ko')) {
+        document.title = 'MBTI 궁합 확인하기';
+        document.getElementById('instruction').textContent = '자동으로 앱스토어로 이동하지 않는 경우, 아래 링크를 직접 클릭해주세요:';
+        document.getElementById('android-link').textContent = '안드로이드 다운로드';
+        document.getElementById('ios-link').textContent = 'iOS 다운로드';
+      }
 
       if (/android/i.test(userAgent)) {
-        window.location.href = 'https://play.google.com/store/apps/details?id=app.netlify.mbti';
+        window.location.href = androidUrl;
       } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = 'https://apps.apple.com/kr/app/you-i-mbti-match/id6502995968';
+        window.location.href = iosUrl;
       } else {
         document.getElementById('links').style.display = 'block';
       }
@@ -21,9 +32,15 @@
     document.addEventListener('DOMContentLoaded', redirectToAppStore);
   </script>
   <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
     #links {
       display: none;
-      text-align: center;
       margin-top: 20px;
     }
 
@@ -32,15 +49,21 @@
       margin: 10px 0;
       font-size: 18px;
       text-decoration: none;
-      color: blue;
+      color: #1a73e8;
+      /* Modern blue color */
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
   <div id="links">
-    <a href="https://play.google.com/store/apps/details?id=com.yourapp.android">Download for Android</a>
-    <a href="https://apps.apple.com/app/idYOUR_APP_ID">Download for iOS</a>
+    <p id="instruction">If you are not redirected, please use the links below:</p>
+    <a id="android-link" href="https://play.google.com/store/apps/details?id=app.netlify.mbti">Download for Android</a>
+    <a id="ios-link" href="https://apps.apple.com/kr/app/you-i-mbti-match/id6502995968">Download for iOS</a>
   </div>
 </body>
 
