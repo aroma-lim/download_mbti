@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirect to App</title>
+  <title>Try MBTI Match!</title>
   <script>
     function redirectToAppStore() {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -14,16 +14,34 @@
       } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         window.location.href = 'https://apps.apple.com/kr/app/you-i-mbti-match/id6502995968';
       } else {
-        document.body.innerHTML = 'Please visit this website on an iOS or Android device to download the app.';
+        document.getElementById('links').style.display = 'block';
       }
     }
 
     document.addEventListener('DOMContentLoaded', redirectToAppStore);
   </script>
+  <style>
+    #links {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    a {
+      display: block;
+      margin: 10px 0;
+      font-size: 18px;
+      text-decoration: none;
+      color: blue;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Redirecting...</h1>
+  <div id="links">
+    <a href="https://play.google.com/store/apps/details?id=com.yourapp.android">Download for Android</a>
+    <a href="https://apps.apple.com/app/idYOUR_APP_ID">Download for iOS</a>
+  </div>
 </body>
 
 </html>
